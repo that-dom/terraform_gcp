@@ -35,7 +35,7 @@ terraform version: 0.10.8
 ```
 
 ## その他
-・ GCPプロジェクト作成は「scripts/gcp_setup/gcp_setup.sh」で行います。
+・ GCPプロジェクト作成は「scripts/gcp_setup/gcp_setup.sh」で行います。<br />
 ・ terraformサーバの作成は「scripts/gcp_setup/terraform_setup.sh」で行います。
 
 ## 現在のディレクトリ構造
