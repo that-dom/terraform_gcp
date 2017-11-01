@@ -43,3 +43,4 @@ sudo mkdir -p $1
 sudo mount -o defaults /dev/sdb1 $1
 sudo chmod a+w $1
 echo "/dev/sdb1 ${1} ext4 defaults 1 1" | sudo tee -a /etc/fstab
+sudo rm -rf ${1}/lost+found
