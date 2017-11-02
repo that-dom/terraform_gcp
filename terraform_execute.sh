@@ -10,8 +10,29 @@ _command() {
     echo "command=plan|apply|destroy|graph|..."
 }
 
+_command_apply() {
+    echo "applyコマンドを実行します"
+    echo "planコマンドを実行して確認しましたか [Y/n]"
+    read ANSWER
+    case $ANSWER in
+        "Y" | "y" | "yes" | "Yes" | "YES" )
+            ;;
+
+        * )
+            exit 1;;
+    esac
+}
+
 _command_destroy() {
-    echo "destroyコマンドの実行には気をつけて下さい"
+    echo "destroyコマンドを実行しますか [Y/n]"
+    read ANSWER
+    case $ANSWER in
+        "Y" | "y" | "yes" | "Yes" | "YES" )
+            ;;
+
+        * )
+            exit 1;;
+    esac
 }
 
 _task() {
@@ -44,6 +65,10 @@ _execute() {
 if [ $# -ne 2 ]; then
     _usage
     exit 1
+fi
+
+if [ $1 == "apply" ]; then
+    _command_apply
 fi
 
 if [ $1 == "destroy" ]; then
