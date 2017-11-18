@@ -24,7 +24,7 @@ module "bucket_default" {
 
 # バックアップ用バケット
 module "bucket_backup" {
-  source = "../../modules/storage_bucket"
+  source = "../../modules/storage_bucket_lifecycle_age"
 
   storage_bucket_variables {
     name                         = "${var.project_name}-backup_bucket"

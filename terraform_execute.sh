@@ -1,7 +1,7 @@
 #!/bin/sh
 
 _usage() {
-    echo "terraform_execute.sh <command> <task>"
+    echo "terraform_execute.sh <command> <task> (upgrade)"
     _command
     _task
 }
@@ -48,7 +48,11 @@ _execute() {
     ln -s ../../common.tf ./
 
     # stateファイル初期化
-    terraform init
+    if [[ $UPGRADE == "upgrade" ]]; then
+        terraform init -upgrade
+    else
+        terraform init
+    fi
 
     # 実行
     if [ $COMMAND == "graph" ]; then
@@ -62,7 +66,7 @@ _execute() {
     unlink common.tf
 }
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 2 ] && [ $# -ne 3 ]; then
     _usage
     exit 1
 fi
@@ -77,5 +81,6 @@ fi
 
 COMMAND=$1
 TASK=$2
+UPGRADE=$3
 
 _execute
