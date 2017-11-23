@@ -10,31 +10,6 @@ _command() {
     echo "command=plan|apply|destroy|graph|..."
 }
 
-_command_apply() {
-    echo "applyコマンドを実行します"
-    echo "planコマンドを実行して確認しましたか [Y/n]"
-    read ANSWER
-    case $ANSWER in
-        "Y" | "y" | "yes" | "Yes" | "YES" )
-            ;;
-
-        * )
-            exit 1;;
-    esac
-}
-
-_command_destroy() {
-    echo "destroyコマンドを実行しますか [Y/n]"
-    read ANSWER
-    case $ANSWER in
-        "Y" | "y" | "yes" | "Yes" | "YES" )
-            ;;
-
-        * )
-            exit 1;;
-    esac
-}
-
 _task() {
     echo "task=tasks以下のディレクトリ名を指定"
 }
@@ -71,12 +46,9 @@ if [ $# -ne 2 ] && [ $# -ne 3 ]; then
     exit 1
 fi
 
-if [ $1 == "apply" ]; then
-    _command_apply
-fi
-
-if [ $1 == "destroy" ]; then
-    _command_destroy
+if [ ! -d ./tasks/${2} ]; then
+    echo "指定したtaskはありません."
+    exit 1
 fi
 
 COMMAND=$1
