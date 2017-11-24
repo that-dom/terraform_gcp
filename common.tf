@@ -1,22 +1,22 @@
 # 実行時に変数指定----------------------------
 variable "key_path" {
-    type = "string"
-    description = "アクセスkeyへのpath"
+  type        = "string"
+  description = "アクセスkeyへのpath"
 }
 # -----------------------------------------
 
 # common.tfvarsで変数指定--------------------
 variable "project_id" {
-    type = "string"
-    description = "プロジェクトID"
+  type        = "string"
+  description = "プロジェクトID"
 }
 variable "project_name" {
-    type = "string"
-    description = "プロジェクト名"
+  type        = "string"
+  description = "プロジェクト名"
 }
 variable "default_region" {
-    type = "string"
-    description = "デフォルトリージョン名"
+  type        = "string"
+  description = "デフォルトリージョン名"
 }
 
 variable "google_web_console_ip" { type = "list" }
@@ -30,5 +30,5 @@ variable "terraform_ip" { type = "list" }
  * https://www.terraform.io/docs/configuration/terraform.html
  */
 terraform {
-  required_version = "= 0.10.8"
+  required_version = "= 0.11.0"
 }

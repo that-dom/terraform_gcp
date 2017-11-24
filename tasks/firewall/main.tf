@@ -1,4 +1,12 @@
 /**
+ * network取得
+ * https://www.terraform.io/docs/providers/google/d/datasource_compute_network.html
+ */
+data "google_compute_network" "network" {
+  name = "${var.project_name}-network"
+}
+
+/**
  * モジュール読み込み
  * https://www.terraform.io/docs/configuration/modules.html
  */
@@ -13,7 +21,7 @@ module "firewall-all-allow-google-ssh" {
 
     firewall_variables {
       firewall_name  = "all-allow-google-ssh"
-      network        = "${var.project_name}-network"
+      network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "tcp"
       description    = "google-web-consoleでの全サーバへのssh. gcp web console: ${var.google_web_console_ip[0]}"
     }
@@ -29,7 +37,7 @@ module "firewall-all-allow-google-rdp" {
 
     firewall_variables {
       firewall_name  = "all-allow-google-rdp"
-      network        = "${var.project_name}-network"
+      network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "tcp"
       description    = "google-web-consoleでの全サーバへのrdp. gcp web console: ${var.google_web_console_ip[0]}"
     }
@@ -45,7 +53,7 @@ module "firewall-all-allow-terraform-ssh" {
 
     firewall_variables {
       firewall_name  = "all-allow-terraform-ssh"
-      network        = "${var.project_name}-network"
+      network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "tcp"
       description    = "terraformから全サーバへのssh. terraform: ${var.terraform_ip[0]}"
     }
@@ -61,7 +69,7 @@ module "firewall-all-allow-ansible-ssh" {
 
     firewall_variables {
       firewall_name  = "all-allow-ansible-ssh"
-      network        = "${var.project_name}-network"
+      network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "tcp"
       description    = "ansibleから全サーバへのssh"
     }
@@ -77,7 +85,7 @@ module "firewall-all-allow-ladder-ssh" {
 
     firewall_variables {
       firewall_name  = "all-allow-ladder-ssh"
-      network        = "${var.project_name}-network"
+      network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "tcp"
       description    = "踏み台サーバから全サーバへのssh"
     }
@@ -93,7 +101,7 @@ module "firewall-web-allow-lb-http" {
 
     firewall_variables {
       firewall_name  = "web-allow-lb-http"
-      network        = "${var.project_name}-network"
+      network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "tcp"
       description    = "lbのwebへのヘルスチェック"
     }
@@ -110,7 +118,7 @@ module "firewall-consul-allow-consul-tcp" {
 
     firewall_variables {
       firewall_name  = "consul-allow-consul-tcp"
-      network        = "${var.project_name}-network"
+      network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "tcp"
       description    = "consulからconsulへのtcpアクセス"
     }
@@ -127,7 +135,7 @@ module "firewall-consul-allow-consul-udp" {
 
     firewall_variables {
       firewall_name  = "consul-allow-consul-udp"
-      network        = "${var.project_name}-network"
+      network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "udp"
       description    = "consulからconsulへのudpアクセス"
     }

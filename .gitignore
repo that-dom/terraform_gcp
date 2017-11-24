@@ -9,3 +9,6 @@ certificate.pem
 chain_certificate.pem
 private.key
 .DS_Store
+*.key
+*.pem
+*.pub

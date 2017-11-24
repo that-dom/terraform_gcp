@@ -7,7 +7,7 @@ variable "instance_add_disk_variables" {
     name                     = ""
     image                    = ""
     size                     = ""
-    network_interface        = ""
+    subnetwork               = ""
     add_disk_name            = ""
     add_disk_size            = ""
     add_disk_type            = ""
@@ -74,7 +74,7 @@ resource "google_compute_instance" "instance" {
   }
 
   network_interface {
-    subnetwork = "${var.instance_add_disk_variables["network_interface"]}"
+    subnetwork = "${var.instance_add_disk_variables["subnetwork"]}"
     access_config {}
   }
 

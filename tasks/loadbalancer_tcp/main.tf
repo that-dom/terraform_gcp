@@ -7,6 +7,33 @@ variable "forwarding_rule_internal_mail_settings" { type = "map" }
 variable "forwarding_rule_ports" { type = "list" }
 
 /**
+ * network取得
+ * https://www.terraform.io/docs/providers/google/d/datasource_compute_network.html
+ */
+data "google_compute_network" "network" {
+  name = "${var.project_name}-network"
+}
+
+/**
+ * subnetwork取得
+ * https://www.terraform.io/docs/providers/google/d/datasource_compute_subnetwork.html
+ */
+data "google_compute_subnetwork" "dev" {
+  name   = "${var.project_name}-dev"
+  region = "${var.region}"
+}
+
+data "google_compute_subnetwork" "stg" {
+  name   = "${var.project_name}-stg"
+  region = "${var.region}"
+}
+
+data "google_compute_subnetwork" "prd" {
+  name   = "${var.project_name}-prd"
+  region = "${var.region}"
+}
+
+/**
  * モジュール読み込み
  * https://www.terraform.io/docs/configuration/modules.html
  */
@@ -30,9 +57,9 @@ module "instance_group_mail" {
   source = "../../modules/instance_group"
 
   instance_group_variables {
-    count   = "${ length(var.zones) }"
+    count   = "${length(var.zones)}"
     name    = "mail-group-%02d"
-    network = "https://www.googleapis.com/compute/v1/projects/${var.project_name}/global/networks/${var.project_name}-network"
+    network = "${data.google_compute_network.network.self_link}"
   }
 
   instance_zones = "${var.zones}"
@@ -61,7 +88,7 @@ module "target_tcp_proxy_mail" {
   source = "../../modules/target_tcp_proxy"
 
   target_tcp_proxy_variables {
-    name = "mail-proxy"
+    name            = "mail-proxy"
     backend_service = "${module.backend_service_mail.region_backend_service_link}"
   }
 }
@@ -71,11 +98,11 @@ module "forwarding_rule_internal_mail_dev" {
   source = "../../modules/forwarding_rule_internal"
 
   forwarding_rule_internal_variables {
-    name                  = "mail-dev-fr"
-    backend_service       = "${module.backend_service_mail.region_backend_service_link}"
-    ip_protocol           = "${var.forwarding_rule_internal_mail_settings["ip_protocol"]}"
-    network               = "${var.project_name}-network"
-    subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.project_name}/regions/${var.region}/subnetworks/${var.project_name}-dev"
+    name            = "mail-dev-fr"
+    backend_service = "${module.backend_service_mail.region_backend_service_link}"
+    ip_protocol     = "${var.forwarding_rule_internal_mail_settings["ip_protocol"]}"
+    network         = "${data.google_compute_network.network.self_link}"
+    subnetwork      = "${data.google_compute_subnetwork.dev.self_link}"
   }
 
   forwarding_rule_ports = "${var.forwarding_rule_ports}"
@@ -86,11 +113,11 @@ module "forwarding_rule_internal_mail_stg" {
   source = "../../modules/forwarding_rule_internal"
 
   forwarding_rule_internal_variables {
-    name                  = "mail-stg-fr"
-    backend_service       = "${module.backend_service_mail.region_backend_service_link}"
-    ip_protocol           = "${var.forwarding_rule_internal_mail_settings["ip_protocol"]}"
-    network               = "${var.project_name}-network"
-    subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.project_name}/regions/${var.region}/subnetworks/${var.project_name}-stg"
+    name            = "mail-stg-fr"
+    backend_service = "${module.backend_service_mail.region_backend_service_link}"
+    ip_protocol     = "${var.forwarding_rule_internal_mail_settings["ip_protocol"]}"
+    network         = "${data.google_compute_network.network.self_link}"
+    subnetwork      = "${data.google_compute_subnetwork.stg.self_link}"
   }
 
   forwarding_rule_ports = "${var.forwarding_rule_ports}"
@@ -101,11 +128,11 @@ module "forwarding_rule_internal_mail_prd" {
   source = "../../modules/forwarding_rule_internal"
 
   forwarding_rule_internal_variables {
-    name                  = "mail-prd-fr"
-    backend_service       = "${module.backend_service_mail.region_backend_service_link}"
-    ip_protocol           = "${var.forwarding_rule_internal_mail_settings["ip_protocol"]}"
-    network               = "${var.project_name}-network"
-    subnetwork            = "https://www.googleapis.com/compute/v1/projects/${var.project_name}/regions/${var.region}/subnetworks/${var.project_name}-prd"
+    name            = "mail-prd-fr"
+    backend_service = "${module.backend_service_mail.region_backend_service_link}"
+    ip_protocol     = "${var.forwarding_rule_internal_mail_settings["ip_protocol"]}"
+    network         = "${data.google_compute_network.network.self_link}"
+    subnetwork      = "${data.google_compute_subnetwork.prd.self_link}"
   }
 
   forwarding_rule_ports = "${var.forwarding_rule_ports}"

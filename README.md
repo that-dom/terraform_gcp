@@ -1,6 +1,6 @@
 # アプリで使用するterraformコードのテンプレート
 
-terraform version: 0.10.8
+terraform version: 0.11.0
 
 
 ## 各環境の構築
@@ -30,6 +30,7 @@ terraform version: 0.10.8
 実行例:
 ```shell
 ./terraform_execute.sh plan network
+./terraform_execute.sh plan network upgrade
 ./terraform_execute.sh apply network
 ./terraform_execute.sh destroy network
 ```
@@ -96,6 +97,10 @@ terraform version: 0.10.8
 │   │   └── region_backend_service_3.tf
 │   ├── ssl_certificate
 │   │   └── ssl_certificate.tf
+│   ├── storage_bucket
+│   │   └── storage_bucket.tf
+│   ├── storage_bucket_lifecycle_age
+│   │   └── storage_bucket_lifecycle_age.tf
 │   ├── subnetwork
 │   │   └── subnetwork.tf
 │   ├── target_http_proxy
@@ -139,6 +144,10 @@ terraform version: 0.10.8
 │   │   ├── main.tf
 │   │   └── terraform.tfvars
 │   ├── network
+│   │   ├── backend.tf
+│   │   ├── main.tf
+│   │   └── terraform.tfvars
+│   ├── storage
 │   │   ├── backend.tf
 │   │   ├── main.tf
 │   │   └── terraform.tfvars

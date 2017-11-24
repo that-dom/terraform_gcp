@@ -6,6 +6,14 @@ variable "ip_cidr_range_prd" {}
 variable "ip_cidr_range_shd" {}
 
 /**
+ * network取得
+ * https://www.terraform.io/docs/providers/google/d/datasource_compute_network.html
+ */
+data "google_compute_network" "network" {
+  name = "${var.project_name}-network"
+}
+
+/**
  * モジュール読み込み
  * https://www.terraform.io/docs/configuration/modules.html
  */
@@ -17,7 +25,7 @@ module "subnetwork_dev" {
     subnetwork_variables {
       subnetwork_name = "${var.project_name}-dev"
       ip_cidr_range   = "${var.ip_cidr_range_dev}"
-      network         = "${var.project_name}-network"
+      network         = "${data.google_compute_network.network.self_link}"
       region          = "${var.region}"
     }
 }
@@ -29,7 +37,7 @@ module "subnetwork_stg" {
     subnetwork_variables {
       subnetwork_name = "${var.project_name}-stg"
       ip_cidr_range   = "${var.ip_cidr_range_stg}"
-      network         = "${var.project_name}-network"
+      network         = "${data.google_compute_network.network.self_link}"
       region          = "${var.region}"
     }
 }
@@ -41,7 +49,7 @@ module "subnetwork_prd" {
     subnetwork_variables {
       subnetwork_name = "${var.project_name}-prd"
       ip_cidr_range   = "${var.ip_cidr_range_prd}"
-      network         = "${var.project_name}-network"
+      network         = "${data.google_compute_network.network.self_link}"
       region          = "${var.region}"
     }
 }
@@ -53,7 +61,7 @@ module "subnetwork_shd" {
     subnetwork_variables {
       subnetwork_name = "${var.project_name}-shd"
       ip_cidr_range   = "${var.ip_cidr_range_shd}"
-      network         = "${var.project_name}-network"
+      network         = "${data.google_compute_network.network.self_link}"
       region          = "${var.region}"
     }
 }

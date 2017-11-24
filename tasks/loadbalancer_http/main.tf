@@ -4,6 +4,14 @@ variable "http_health_check_web_settings" { type = "map" }
 variable "backend_service_web_settings" { type = "map" }
 
 /**
+ * network取得
+ * https://www.terraform.io/docs/providers/google/d/datasource_compute_network.html
+ */
+data "google_compute_network" "network" {
+  name = "${var.project_name}-network"
+}
+
+/**
  * モジュール読み込み
  * https://www.terraform.io/docs/configuration/modules.html
  */
@@ -27,9 +35,9 @@ module "instance_group_web" {
   source = "../../modules/instance_group"
 
   instance_group_variables {
-    count   = "${ length(var.zones) }"
+    count   = "${length(var.zones)}"
     name    = "web-group-%02d"
-    network = "https://www.googleapis.com/compute/v1/projects/${var.project_name}/global/networks/${var.project_name}-network"
+    network = "${data.google_compute_network.network.self_link}"
   }
 
   instance_zones = "${var.zones}"
@@ -68,8 +76,8 @@ module "target_http_proxy_web" {
   source = "../../modules/target_http_proxy"
 
   target_http_proxy_variables {
-    name        = "web-proxy"
-    url_map     = "${module.url_map_web.url_map_link}"
+    name    = "web-proxy"
+    url_map = "${module.url_map_web.url_map_link}"
   }
 }
 

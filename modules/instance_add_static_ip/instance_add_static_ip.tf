@@ -7,7 +7,7 @@ variable "instance_add_static_ip_variables" {
     name              = ""
     image             = ""
     size              = ""
-    network_interface = ""
+    subnetwork        = ""
     env               = ""
   }
 }
@@ -64,7 +64,7 @@ resource "google_compute_instance" "instance" {
   }
 
   network_interface {
-    subnetwork = "${var.instance_add_static_ip_variables["network_interface"]}"
+    subnetwork = "${var.instance_add_static_ip_variables["subnetwork"]}"
     access_config {
       nat_ip = "${element(google_compute_address.compute_address.*.address, count.index)}"
     }
