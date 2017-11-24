@@ -1,5 +1,5 @@
 variable "url_map_variables" {
-  type = "map"
+  type        = "map"
   description = "url_map変数"
   default = {
     name            = ""

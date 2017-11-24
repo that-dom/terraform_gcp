@@ -1,5 +1,5 @@
 variable "region_backend_service_variables" {
-  type = "map"
+  type        = "map"
   description = "region_backend_service変数"
   default = {
     name             = ""
@@ -14,7 +14,7 @@ variable "region_backend_service_variables" {
 }
 
 variable "health_check_links" {
-  type = "list"
+  type        = "list"
   description = "ヘルスチェックURL"
 }
 

@@ -1,9 +1,9 @@
 variable "dns_zone_variables" {
-  type = "map"
+  type        = "map"
   description = "DNSゾーン変数"
   default = {
-    dns_zone_name   = ""
-    dns_name        = ""
+    dns_zone_name = ""
+    dns_name      = ""
   }
 }
 

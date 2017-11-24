@@ -1,12 +1,12 @@
 variable "storage_bucket_variables" {
-    type = "map"
+    type        = "map"
     description = "バケット変数"
 
     default = {
-      name                                    = ""
-      location                                = ""
-      storage_class                           = ""
-      env                                     = ""
+      name          = ""
+      location      = ""
+      storage_class = ""
+      env           = ""
     }
 }
 

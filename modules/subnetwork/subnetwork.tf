@@ -1,12 +1,12 @@
 variable "subnetwork_variables" {
-    type = "map"
+    type        = "map"
     description = "サブネットワーク変数"
 
     default = {
       subnetwork_name = ""
-      ip_cidr_range = ""
-      network       = ""
-      region        = ""
+      ip_cidr_range   = ""
+      network         = ""
+      region          = ""
     }
 }
 

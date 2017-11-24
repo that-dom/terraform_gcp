@@ -1,29 +1,29 @@
 variable "instance_variables" {
-  type = "map"
+  type        = "map"
   description = "compute instance変数"
   default = {
-    count             = 0
-    machine_type      = ""
-    name              = ""
-    image             = ""
-    size              = ""
-    subnetwork        = ""
-    env               = ""
+    count        = 0
+    machine_type = ""
+    name         = ""
+    image        = ""
+    size         = ""
+    subnetwork   = ""
+    env          = ""
   }
 }
 
 variable "instance_zones" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
 variable "instance_tags" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
 variable "service_accounts" {
-  type = "list"
+  type    = "list"
   default = []
 }
 

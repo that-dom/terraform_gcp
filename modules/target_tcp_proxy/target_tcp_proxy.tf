@@ -1,5 +1,5 @@
 variable "target_tcp_proxy_variables" {
-  type = "map"
+  type        = "map"
   description = "target_tcp_proxy変数"
   default = {
     name            = ""

@@ -1,5 +1,5 @@
 variable "target_http_proxy_variables" {
-  type = "map"
+  type        = "map"
   description = "target_http_proxy変数"
   default = {
     name    = ""

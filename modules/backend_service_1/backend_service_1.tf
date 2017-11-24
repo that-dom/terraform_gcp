@@ -1,5 +1,5 @@
 variable "backend_service_variables" {
-  type = "map"
+  type        = "map"
   description = "backend_service変数"
   default = {
     name            = ""
@@ -11,7 +11,7 @@ variable "backend_service_variables" {
   }
 }
 variable "health_check_links" {
-  type = "list"
+  type        = "list"
   description = "ヘルスチェックURL"
 }
 
@@ -20,13 +20,13 @@ variable "health_check_links" {
  * https://www.terraform.io/docs/providers/google/r/compute_backend_service.html
  */
 resource "google_compute_backend_service" "backend_service" {
-  name          = "${var.backend_service_variables["name"]}"
-  timeout_sec   = "${var.backend_service_variables["timeout_sec"]}"
-  protocol      = "${var.backend_service_variables["protocol"]}"
-  port_name     = "${var.backend_service_variables["port_name"]}"
+  name        = "${var.backend_service_variables["name"]}"
+  timeout_sec = "${var.backend_service_variables["timeout_sec"]}"
+  protocol    = "${var.backend_service_variables["protocol"]}"
+  port_name   = "${var.backend_service_variables["port_name"]}"
 
   backend {
-    group = "${var.backend_service_variables["backend_group"]}"
+    group           = "${var.backend_service_variables["backend_group"]}"
     max_utilization = "${var.backend_service_variables["max_utilization"]}"
   }
 

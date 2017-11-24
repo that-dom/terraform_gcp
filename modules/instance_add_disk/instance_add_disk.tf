@@ -1,5 +1,5 @@
 variable "instance_add_disk_variables" {
-  type = "map"
+  type        = "map"
   description = "compute instance(追加ディスク)変数"
   default = {
     count                    = 0
@@ -19,17 +19,17 @@ variable "instance_add_disk_variables" {
 }
 
 variable "instance_zones" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
 variable "instance_tags" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
 variable "service_accounts" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
@@ -69,7 +69,7 @@ resource "google_compute_instance" "instance" {
   }
 
   attached_disk {
-    source = "${element(google_compute_disk.add_disk.*.self_link, count.index)}"
+    source      = "${element(google_compute_disk.add_disk.*.self_link, count.index)}"
     device_name = "${element(google_compute_disk.add_disk.*.name, count.index)}"
   }
 
@@ -87,8 +87,8 @@ resource "google_compute_instance" "instance" {
   }
 
   connection {
-      type = "ssh"
-      user = "terraform-user"
+      type        = "ssh"
+      user        = "terraform-user"
       private_key = "${file(var.instance_add_disk_variables["private_key"])}"
   }
 

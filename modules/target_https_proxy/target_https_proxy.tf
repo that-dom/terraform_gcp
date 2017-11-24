@@ -1,14 +1,14 @@
 variable "target_https_proxy_variables" {
-  type = "map"
+  type        = "map"
   description = "target_https_proxy変数"
   default = {
-    name            = ""
-    url_map         = ""
+    name    = ""
+    url_map = ""
   }
 }
 
 variable "ssl_certificate_links" {
-  type = "list"
+  type        = "list"
   description = "SSL証明書"
 }
 

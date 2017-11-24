@@ -1,18 +1,18 @@
 variable "forwarding_rule_internal_variables" {
-  type = "map"
+  type        = "map"
   description = "forwarding_rule_internal変数"
   default = {
-    name                  = ""
-    backend_service       = ""
-    ip_protocol           = ""
-    network               = ""
-    subnetwork            = ""
-    ports                 = ""
+    name            = ""
+    backend_service = ""
+    ip_protocol     = ""
+    network         = ""
+    subnetwork      = ""
+    ports           = ""
   }
 }
 
 variable "forwarding_rule_ports" {
-  type = "list"
+  type    = "list"
   default = []
 }
 

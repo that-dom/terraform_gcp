@@ -1,5 +1,5 @@
 variable "global_address_variables" {
-  type = "map"
+  type        = "map"
   description = "global_address変数"
   default = {
     name  = ""

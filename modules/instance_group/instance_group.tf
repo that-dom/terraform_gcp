@@ -1,5 +1,5 @@
 variable "instance_group_variables" {
-  type = "map"
+  type        = "map"
   description = "instance group変数"
   default = {
     count   = 0
@@ -9,7 +9,7 @@ variable "instance_group_variables" {
 }
 
 variable "instance_zones" {
-  type = "list"
+  type    = "list"
   default = []
 }
 

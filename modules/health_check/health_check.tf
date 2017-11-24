@@ -1,5 +1,5 @@
 variable "health_check_variables" {
-  type = "map"
+  type        = "map"
   description = "health_check変数"
   default = {
     name                  = ""

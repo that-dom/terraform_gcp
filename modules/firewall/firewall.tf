@@ -1,31 +1,31 @@
 variable "firewall_variables" {
-  type = "map"
+  type        = "map"
   description = "ファイアーウォール変数"
   default = {
-    firewall_name = ""
-    network = ""
+    firewall_name  = ""
+    network        = ""
     allow_protocol = ""
-    description = ""
+    description    = ""
   }
 }
 
 variable "allow_ports" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
 variable "source_ranges" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
 variable "source_tags" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
 variable "target_tags" {
-  type = "list"
+  type    = "list"
   default = []
 }
 
@@ -43,7 +43,7 @@ resource "google_compute_firewall" "firewall" {
   }
 
   source_ranges = "${var.source_ranges}"
-  source_tags = "${var.source_tags}"
-  target_tags = "${var.target_tags}"
-  description = "${var.firewall_variables["description"]}"
+  source_tags   = "${var.source_tags}"
+  target_tags   = "${var.target_tags}"
+  description   = "${var.firewall_variables["description"]}"
 }

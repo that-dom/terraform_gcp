@@ -1,5 +1,5 @@
 variable "global_forwarding_rule_variables" {
-  type = "map"
+  type        = "map"
   description = "global_forwarding_rule変数"
   default = {
     name       = ""

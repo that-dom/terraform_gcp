@@ -1,5 +1,5 @@
 variable "network_variables" {
-    type = "map"
+    type        = "map"
     description = "ネットワーク変数"
 
     default = {
@@ -12,7 +12,7 @@ variable "network_variables" {
  * https://www.terraform.io/docs/providers/google/d/datasource_compute_network.html
  */
 resource "google_compute_network" "network" {
-  name  = "${var.network_variables["network_name"]}"
+  name                    = "${var.network_variables["network_name"]}"
   auto_create_subnetworks = "false"
 }
 
