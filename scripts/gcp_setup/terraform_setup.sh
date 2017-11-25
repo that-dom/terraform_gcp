@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TERRAFORM_VERSION="0.10.8"
+TERRAFORM_VERSION="0.11.0"
 
 _usage() {
     echo "terraform_setup.sh <command>"

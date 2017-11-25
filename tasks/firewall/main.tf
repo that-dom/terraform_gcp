@@ -74,24 +74,24 @@ module "firewall-all-allow-ansible-ssh" {
       description    = "ansibleから全サーバへのssh"
     }
 
-    allow_ports   = ["22"]
+    allow_ports = ["22"]
     source_tags = ["ansible"]
 }
 
-# all-allow-ladder-ssh
+# all-allow-bastion-ssh
 # 踏み台サーバから全サーバへのssh
-module "firewall-all-allow-ladder-ssh" {
+module "firewall-all-allow-bastion-ssh" {
     source = "../../modules/firewall"
 
     firewall_variables {
-      firewall_name  = "all-allow-ladder-ssh"
+      firewall_name  = "all-allow-bastion-ssh"
       network        = "${data.google_compute_network.network.self_link}"
       allow_protocol = "tcp"
       description    = "踏み台サーバから全サーバへのssh"
     }
 
-    allow_ports   = ["22"]
-    source_tags   = ["ladder"]
+    allow_ports = ["22"]
+    source_tags = ["bastion"]
 }
 
 # web-allow-lb-http
@@ -123,9 +123,9 @@ module "firewall-consul-allow-consul-tcp" {
       description    = "consulからconsulへのtcpアクセス"
     }
 
-    allow_ports   = ["8300", "8301", "8302", "8400", "8500", "8600"]
-    source_tags   = ["consul"]
-    target_tags   = ["consul"]
+    allow_ports = ["8300", "8301", "8302", "8400", "8500", "8600"]
+    source_tags = ["consul"]
+    target_tags = ["consul"]
 }
 
 # consul-allow-consul-udp
@@ -140,9 +140,9 @@ module "firewall-consul-allow-consul-udp" {
       description    = "consulからconsulへのudpアクセス"
     }
 
-    allow_ports   = ["8301", "8302", "8600"]
-    source_tags   = ["consul"]
-    target_tags   = ["consul"]
+    allow_ports = ["8301", "8302", "8600"]
+    source_tags = ["consul"]
+    target_tags = ["consul"]
 }
 
 # dev===========================================================

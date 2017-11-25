@@ -56,15 +56,15 @@ instance_db_settings {
 instance_db_instance_tags = ["prd", "db", "consul"]
 instance_db_service_accounts = []
 
-// instance: ladder設定
-instance_ladder_settings {
+// instance: bastion設定
+instance_bastion_settings {
   count        = 1
   machine_type = "f1-micro"
   image        = "centos-6-v20171018"
   size         = 10
 }
-instance_ladder_instance_tags = ["prd", "ladder", "consul"]
-instance_ladder_service_accounts = [
+instance_bastion_instance_tags = ["prd", "bastion", "consul"]
+instance_bastion_service_accounts = [
   "https://www.googleapis.com/auth/devstorage.full_control",
   "https://www.googleapis.com/auth/bigquery",
   "https://www.googleapis.com/auth/compute",

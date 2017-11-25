@@ -14,9 +14,9 @@ variable "instance_db_settings" { type = "map" }
 variable "instance_db_instance_tags" { type = "list" }
 variable "instance_db_service_accounts" { type = "list" }
 
-variable "instance_ladder_settings" { type = "map" }
-variable "instance_ladder_instance_tags" { type = "list" }
-variable "instance_ladder_service_accounts" { type = "list" }
+variable "instance_bastion_settings" { type = "map" }
+variable "instance_bastion_instance_tags" { type = "list" }
+variable "instance_bastion_service_accounts" { type = "list" }
 
 variable "instance_consul_settings" { type = "map" }
 variable "instance_consul_instance_tags" { type = "list" }
@@ -101,23 +101,23 @@ module "instance_db" {
   service_accounts = "${concat(var.common_instance_service_accounts, var.instance_db_service_accounts)}"
 }
 
-# ladder
-module "instance_ladder" {
+# bastion
+module "instance_bastion" {
   source = "../../modules/instance_add_static_ip"
 
   instance_add_static_ip_variables {
-    count        = "${var.instance_ladder_settings["count"]}"
-    machine_type = "${var.instance_ladder_settings["machine_type"]}"
-    name         = "${var.env == "prd" ? "ladder%04d" : "${var.env}-ladder%04d"}"
-    image        = "${var.instance_ladder_settings["image"]}"
-    size         = "${var.instance_ladder_settings["size"]}"
+    count        = "${var.instance_bastion_settings["count"]}"
+    machine_type = "${var.instance_bastion_settings["machine_type"]}"
+    name         = "${var.env == "prd" ? "bastion%04d" : "${var.env}-bastion%04d"}"
+    image        = "${var.instance_bastion_settings["image"]}"
+    size         = "${var.instance_bastion_settings["size"]}"
     subnetwork   = "${data.google_compute_subnetwork.subnetwork.self_link}"
     env          = "${var.env}"
   }
 
   instance_zones   = "${var.zones}"
-  instance_tags    = "${var.instance_ladder_instance_tags}"
-  service_accounts = "${concat(var.common_instance_service_accounts, var.instance_ladder_service_accounts)}"
+  instance_tags    = "${var.instance_bastion_instance_tags}"
+  service_accounts = "${concat(var.common_instance_service_accounts, var.instance_bastion_service_accounts)}"
 }
 
 # consul
