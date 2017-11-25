@@ -12,3 +12,8 @@ private.key
 *.key
 *.pem
 *.pub
+keys/*
+!keys/service_account/
+!keys/ssh/
+!keys/ssl/
+!.gitkeep
