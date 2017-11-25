@@ -13,7 +13,7 @@ private.key
 *.pem
 *.pub
 keys/*
-!keys/service_account/
-!keys/ssh/
-!keys/ssl/
-!.gitkeep
+!keys/service_account/.gitkeep
+!keys/ssh/.gitkeep
+!keys/ssl/.gitkeep
+
